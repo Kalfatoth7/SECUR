@@ -410,6 +410,19 @@ fun PatientDashboard(
                     icon = { Icon(Icons.Default.Medication, contentDescription = null, modifier = Modifier.size(18.dp)) },
                     modifier = Modifier.testTag("tab_medication_logs")
                 )
+                Tab(
+                    selected = activeTab == 3,
+                    onClick = { activeTab = 3 },
+                    text = {
+                        Text(
+                            text = "المؤشرات الحيوية",
+                            fontWeight = if (activeTab == 3) FontWeight.Bold else FontWeight.Normal,
+                            fontSize = 13.sp
+                        )
+                    },
+                    icon = { Icon(Icons.Default.ShowChart, contentDescription = null, modifier = Modifier.size(18.dp)) },
+                    modifier = Modifier.testTag("tab_health_trends")
+                )
             }
         }
 
@@ -602,6 +615,23 @@ fun PatientDashboard(
                             onUpdateMedicationStatus(log.id, newStatus, if (newStatus == "تم التناول") now else "")
                         }
                     )
+                }
+            }
+        }
+
+        // TAB 3: Health Trends Dashboard
+        if (activeTab == 3) {
+            item {
+                Text(
+                    text = "مؤشرات المريض الحيوية",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 16.dp, top = 8.dp)
+                )
+            }
+            item {
+                Box(modifier = Modifier.fillMaxWidth().height(600.dp)) {
+                    com.example.ui.components.PatientSummaryDashboard()
                 }
             }
         }
