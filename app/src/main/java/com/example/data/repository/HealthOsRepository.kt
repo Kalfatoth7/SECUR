@@ -71,6 +71,7 @@ class HealthOsRepository(private val context: Context) {
     val medicines: Flow<List<Medicine>> = db.medicineDao().getAllMedicines()
     val employees: Flow<List<Employee>> = db.employeeDao().getAllEmployees()
     val patients: Flow<List<Patient>> = db.patientDao().getAllPatients()
+    val patientProfiles: Flow<List<PatientProfile>> = db.patientProfileDao().getAllPatientProfiles()
     val appointments: Flow<List<Appointment>> = db.appointmentDao().getAllAppointments()
     val financialRecords: Flow<List<FinancialRecord>> = db.financialRecordDao().getAllRecords()
     val auditLogs: Flow<List<AuditLog>> = db.auditLogDao().getAllAuditLogs()
@@ -218,6 +219,22 @@ class HealthOsRepository(private val context: Context) {
 
     suspend fun addPatient(patient: Patient) {
         db.patientDao().insertPatient(patient)
+    }
+
+    suspend fun addPatientProfile(patientProfile: PatientProfile): Long {
+        return db.patientProfileDao().insertPatientProfile(patientProfile)
+    }
+
+    suspend fun updatePatientProfile(patientProfile: PatientProfile) {
+        db.patientProfileDao().updatePatientProfile(patientProfile)
+    }
+
+    suspend fun deletePatientProfile(patientProfile: PatientProfile) {
+        db.patientProfileDao().deletePatientProfile(patientProfile)
+    }
+
+    fun getPatientProfileById(id: Long): Flow<PatientProfile?> {
+        return db.patientProfileDao().getPatientProfileById(id)
     }
 
     suspend fun addEmployee(employee: Employee) {

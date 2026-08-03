@@ -77,6 +77,30 @@ interface PatientDao {
 }
 
 @Dao
+interface PatientProfileDao {
+    @Query("SELECT * FROM patient_profiles ORDER BY id DESC")
+    fun getAllPatientProfiles(): Flow<List<PatientProfile>>
+
+    @Query("SELECT * FROM patient_profiles WHERE id = :id")
+    fun getPatientProfileById(id: Long): Flow<PatientProfile?>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPatientProfile(patientProfile: PatientProfile): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPatientProfiles(patientProfiles: List<PatientProfile>)
+
+    @Update
+    suspend fun updatePatientProfile(patientProfile: PatientProfile)
+
+    @Delete
+    suspend fun deletePatientProfile(patientProfile: PatientProfile)
+
+    @Query("DELETE FROM patient_profiles WHERE id = :id")
+    suspend fun deletePatientProfileById(id: Long)
+}
+
+@Dao
 interface AppointmentDao {
     @Query("SELECT * FROM appointments ORDER BY id DESC")
     fun getAllAppointments(): Flow<List<Appointment>>

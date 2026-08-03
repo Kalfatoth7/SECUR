@@ -12,6 +12,7 @@ import com.example.data.models.*
         Medicine::class,
         Employee::class,
         Patient::class,
+        PatientProfile::class,
         Appointment::class,
         FinancialRecord::class,
         Surgery::class,
@@ -25,7 +26,7 @@ import com.example.data.models.*
         MedicalHistoryRecord::class,
         MedicationLog::class
     ],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class HealthDatabase : RoomDatabase() {
@@ -33,6 +34,7 @@ abstract class HealthDatabase : RoomDatabase() {
     abstract fun medicineDao(): MedicineDao
     abstract fun employeeDao(): EmployeeDao
     abstract fun patientDao(): PatientDao
+    abstract fun patientProfileDao(): PatientProfileDao
     abstract fun appointmentDao(): AppointmentDao
     abstract fun financialRecordDao(): FinancialRecordDao
     abstract fun surgeryDao(): SurgeryDao

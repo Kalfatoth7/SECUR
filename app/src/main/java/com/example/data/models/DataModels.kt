@@ -76,7 +76,23 @@ data class Patient(
     val gender: String, // "ذكر", "أنثى"
     val nationalId: String,
     val bloodType: String,
-    val allergies: String = "لا يوجد"
+    val allergies: String = "لا يوجد",
+    val medicalHistory: String = "لا يوجد"
+)
+
+@Entity(tableName = "patient_profiles")
+data class PatientProfile(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val name: String,
+    val phone: String,
+    val email: String = "",
+    val contactDetails: String = "",
+    val medicalHistory: String = "",
+    val age: Int = 0,
+    val gender: String = "",
+    val bloodType: String = "",
+    val allergies: String = "لا يوجد",
+    val fileNumber: String = ""
 )
 
 @Entity(tableName = "medical_history_records")
